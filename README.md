@@ -42,7 +42,7 @@ Some additional Learning material were used:
 
 - **Computer Science as USF - Algorithm visualisation tool**
 https://www.cs.usfca.edu/~galles/visualization/Heap.html
-This was used to develop a conceptual understanding the circular buffer implementation.
+This was used to develop a conceptual understanding of the circular buffer implementation.
 
 - **AI (ChatGPT)**
 AI was used for documentation assistance, grammar corrections, and spell checking.
