@@ -46,7 +46,7 @@ All code in this project was written by me.
 Some additional Learning material were used:
 
 - **Computer Science as USF - Algorithm visualisation tool**
-https://www.cs.usfca.edu/~galles/visualization/Heap.html
+https://www.cs.usfca.edu/~galles/visualization/QueueArray.html
 This was used to develop a conceptual understanding of the circular buffer implementation.
 
 - **AI (ChatGPT)**
