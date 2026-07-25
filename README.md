@@ -5,6 +5,11 @@ A VecDeque implementation in C++.
 
 This project was created as part of a learning exercise to understand data structures and algorithms, specifically queues.
 
+## Documentation
+
+API documentation:
+https://fil187.github.io/MyDeque/
+
 ## Features
 
 - VecDeque circular buffer implementation
