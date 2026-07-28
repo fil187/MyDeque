@@ -8,6 +8,7 @@
  * @invariant `size <= capacity`
  * @invariant `head < capacity`
  * @invariant `data != nullptr`
+ * @invariant `size` is always greater then 25% of capacity iff `capacity <= DEFAULT_CAPACITY`
  * @invariant For every `0 <= i < size`,
  *            `data[(head + i) % capacity]`
  *            stores the ith element of the deque.
@@ -29,7 +30,7 @@ public:
     /**
      * @brief Construct an empty deque with the default capacity.
      * 
-     * @throw std::bad_alloc if the allocation fails
+     * @throw std::bad_alloc if the allocation fails.
      */
     MyDeque() : MyDeque(DEFAULT_CAPACITY) {}
 
@@ -37,8 +38,8 @@ public:
      * @brief Construct an empty deque with the specified capacity.
      * 
      * @param capacity The initial number of elements that can be stored without reallocation.
-     * @throw std::invalid_argument if `capacity == 0`
-     * @throw std::bad_alloc if the allocation fails
+     * @throw std::invalid_argument if `capacity == 0`.
+     * @throw std::bad_alloc if the allocation fails.
      */
     MyDeque(size_t capacity) : size(0), head(0), capacity(capacity) {
         if (capacity == 0)
@@ -53,8 +54,8 @@ public:
      * @par Complexity
      *      O(m)
      * 
-     * @throw std::invalid_argument if `source == nullptr`
-     * @throw std::bad_alloc if the allocation fails
+     * @throw std::invalid_argument if `source == nullptr`.
+     * @throw std::bad_alloc if the allocation fails.
      * @param source The array whose contents are copied into this deque.
      * @param size The number of elements in `source`.
      */
@@ -72,7 +73,7 @@ public:
      * @par Complexity
      *      O(m)
      * 
-     * @throw std::bad_alloc if the allocation fails
+     * @throw std::bad_alloc if the allocation fails.
      * @param source The deque whose contents are copied into this deque.
      */
     MyDeque(const MyDeque<T>& source) : size(source.size), head(0), capacity(source.capacity) {
@@ -138,13 +139,15 @@ public:
      *      Worst case O(n)
      *      Average case O(1)
      * 
+     * @throw std::bad_alloc if the allocation fails.
+     * 
      * @post The length of this deque is increased by 1.
      * @post `element` is the last element of the deque.
      * @post The rest of the deque remains unchanged.
      */
     void push_back(const T& element) {
         if (size == capacity)
-            resize(std::max((size_t)1, 2 * capacity));
+            resize(2 * capacity);
         
         data[(head + size++) % capacity] = element;
     }
@@ -162,7 +165,7 @@ public:
      */
     void push_front(T element) {
         if (size == capacity)
-            resize(std::max((size_t)1, 2 * capacity));
+            resize(2 * capacity);
         if (head == 0)
             head = capacity;    
         
@@ -186,7 +189,7 @@ public:
     T pop_back() {
         if (size == 0)
             throw std::out_of_range("can not pop() on an empty deque");
-        if (size == capacity >> 2) // >> 2 -> 1/4
+        if (capacity > DEFAULT_CAPACITY && size == capacity >> 2) // >> 2 -> 1/4
             resize(capacity >> 1); // >> 1 -> 1/2
     
         return data[(head + (--size)) % capacity];
@@ -208,7 +211,7 @@ public:
     T pop_front() {
         if (size == 0)
             throw std::out_of_range("can not pop() on an empty deque");
-        if (size == capacity >> 2) // >> 2 -> 1/4
+        if (capacity > DEFAULT_CAPACITY && size == capacity >> 2) // >> 2 -> 1/4
             resize(capacity >> 1); // >> 1 -> 1/2
         
         T result = data[head];
@@ -242,13 +245,13 @@ private:
 
     /**
      * @par Complexity
-     *      Worst case O(n)
+     *      O(n)
      * 
-     * @throw std::bad_alloc if the allocation fails
+     * @throw std::bad_alloc if the allocation fails.
      * 
      * @pre `new_capacity > 0`
-     * @post The contents of this deque are unchanged
-     * @post The capacity of this deque is equal to new_capacity
+     * @post The contents of this deque are unchanged.
+     * @post The capacity of this deque is equal to new_capacity.
      */
     void resize(size_t new_capacity) {
         T* destination = new T[new_capacity];
