@@ -37,8 +37,8 @@ public:
      * @brief Construct an empty deque with the specified capacity.
      * 
      * @param capacity The initial number of elements that can be stored without reallocation.
-     * @throw `std::invalid_argument` if `capacity == 0`
-     * @throw `std::bad_alloc` if the allocation fails
+     * @throw std::invalid_argument if `capacity == 0`
+     * @throw std::bad_alloc if the allocation fails
      */
     MyDeque(size_t capacity) : size(0), head(0), capacity(capacity) {
         if (capacity == 0)
