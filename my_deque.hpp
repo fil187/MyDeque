@@ -85,7 +85,7 @@ public:
     }
 
     /**
-     * @note Move assignment are disabled because this container's invariants do not permit a moved-from state.
+     * @note Move construction are disabled because this container's invariants do not permit a moved-from state.
      */
     MyDeque(const MyDeque<T>&&) = delete;
 
