@@ -85,6 +85,16 @@ public:
     }
 
     /**
+     * @note Move assignment are disabled because this container's invariants do not permit a moved-from state.
+     */
+    MyDeque(const MyDeque<T>&&) = delete;
+
+    /**
+     * @note Move assignment are disabled because this container's invariants do not permit a moved-from state.
+     */
+    MyDeque& operator=(const MyDeque<T>&&) = delete;
+
+    /**
      * @throw std::out_of_range if i greater than or equal to the length of this deque.
      * @return A reference to the element at index `i`.
      */
