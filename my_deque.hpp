@@ -87,12 +87,12 @@ public:
     /**
      * @note Move construction is disabled because this container's invariants do not permit a moved-from state.
      */
-    MyDeque(const MyDeque<T>&&) = delete;
+    MyDeque(const MyDeque&&) = delete;
 
     /**
      * @note Move assignment is disabled because this container's invariants do not permit a moved-from state.
      */
-    MyDeque<T>& operator=(const MyDeque<T>&&) = delete;
+    MyDeque& operator=(const MyDeque&&) = delete;
 
     /**
      * @throw std::out_of_range if i greater than or equal to the length of this deque.
