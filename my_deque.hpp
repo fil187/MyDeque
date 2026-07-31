@@ -13,7 +13,7 @@
  * @invariant `size` is always greater then 25% of capacity iff `capacity <= DEFAULT_CAPACITY`
  * @invariant For every `0 <= i < size`,
  *            `data[(head + i) % capacity]`
- *            stores the ith element of the deque.
+ *            stores the `ith` element of the deque.
  * @invariant data points to an allocated array of exactly `capacity` elements `T`.
  */
 template <std::copyable T>
