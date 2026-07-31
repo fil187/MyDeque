@@ -4,6 +4,8 @@
 /**
  * @brief A dynamically allocated mutable double-ended queue.
  * 
+ * @tparam T must be copyable.
+ * 
  * @invariant `capacity > 0`
  * @invariant `size <= capacity`
  * @invariant `head < capacity`
@@ -14,7 +16,7 @@
  *            stores the ith element of the deque.
  * @invariant data points to an allocated array of exactly `capacity` elements `T`.
  */
-template <typename T>
+template <std::copyable T>
 class MyDeque {
 
 private:
@@ -85,12 +87,14 @@ public:
     }
 
     /**
-     * @note Move construction is disabled because this container's invariants do not permit a moved-from state.
+     * @note Move operations are intentionally disabled because 
+     *       this container's invariants do not permit a moved-from state.
      */
     MyDeque(const MyDeque&&) = delete;
 
     /**
-     * @note Move assignment is disabled because this container's invariants do not permit a moved-from state.
+     * @note Move operations are intentionally disabled because 
+     *       this container's invariants do not permit a moved-from state.
      */
     MyDeque& operator=(const MyDeque&&) = delete;
 
@@ -236,7 +240,7 @@ public:
      * @note The representation array is realligned if `head != 0`
      * 
      * @par Complexity
-     *      Average case O(n * log(n))
+     *      Average case O(n * log n)
      * 
      * @post The deque is sorted in increasing order.
      * @post All elements originally in data are present in the same number.
@@ -289,7 +293,7 @@ private:
 
     /**
      * @par Complexity
-     *      Average case O(n * log(n))
+     *      Average case O(n * log n)
      * 
      * @post `data[left..right]` is sorted.
      * @post All elements originally in data are present in the same number.
