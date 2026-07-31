@@ -88,13 +88,13 @@ public:
      * @note Move operations are intentionally disabled because 
      *       this container's invariants do not permit a moved-from state.
      */
-    MyDeque(const MyDeque&&) = delete;
+    MyDeque(MyDeque&&) = delete;
 
     /**
      * @note Move operations are intentionally disabled because 
      *       this container's invariants do not permit a moved-from state.
      */
-    MyDeque& operator=(const MyDeque&&) = delete;
+    MyDeque& operator=(MyDeque&&) = delete;
 
     /**
      * @throw std::out_of_range if i greater than or equal to the length of this deque.
