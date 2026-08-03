@@ -68,7 +68,8 @@ public:
     }
 
     /**
-     * @brief Constructs a deque containing copies of the elements in `source`.
+     * Constructs a deque containing copies of the elements in `source`.
+     * @brief Copy Constructor.
      * 
      * @par Complexity
      *      O(m)
@@ -79,7 +80,7 @@ public:
     MyDeque(const MyDeque<T>& source) : size(source.size), head(0), capacity(source.capacity) {
         data = new T[source.capacity];
         for (size_t i = 0; i < source.size; i++) {
-            size_t src_idx = (i + head) % source.capacity;
+            size_t src_idx = (i + source.head) % source.capacity;
             data[i] = source.data[src_idx];
         }
     }
@@ -108,7 +109,8 @@ public:
     }
 
     /**
-     * @brief Replaces the contents of this deque with those of `source`.
+     * Replaces the contents of this deque with those of `source`.
+     * @brief Copy Assignment Operator.
      * 
      * @par Complexity
      *      Worst case O(n)
@@ -124,15 +126,14 @@ public:
         
         delete[] data;
         data = new T[source.capacity];
-
-        if (data == nullptr)
-            throw std::bad_alloc();
-
-        capacity = source.capacity;
         size = source.size;
-
-        for (size_t i = head; i < source.size; i++)
-            data[i % capacity] = source.data[i % capacity];
+        head = 0;
+        capacity = source.capacity;
+        
+        for (size_t i = 0; i < source.size; i++) {
+            size_t src_idx = (i + source.head) % source.capacity;
+            data[i] = source.data[src_idx];
+        }
         
         return *this;
     }
