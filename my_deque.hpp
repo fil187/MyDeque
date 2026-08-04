@@ -239,7 +239,7 @@ public:
      * @note The representation array is realligned if `head != 0`
      * 
      * @par Complexity
-     *      Average case O(n * log n)
+     *      O(n * log n)
      * 
      * @post The deque is sorted in increasing order.
      * @post All elements originally in data are present in the same number.
@@ -278,9 +278,12 @@ private:
     }
 
     /**
+     * @par Complexity
+     *      O(n)
+     * 
      * @post `head == 0`
      * @post The first element is positioned at index 0
-     *       and the last element is positioned at index `size - 1`.
+     * @post The last element is positioned at index `size - 1`.
      * @post All elements originally in data are present in the same number.
      * @post All elements originally in data are present in the same order.
      */
@@ -292,7 +295,7 @@ private:
 
     /**
      * @par Complexity
-     *      Average case O(n * log n)
+     *      O(n * log n)
      * 
      * @post `data[left..right]` is sorted.
      * @post All elements originally in data are present in the same number.
