@@ -18,8 +18,8 @@ https://fil187.github.io/MyDeque/
 - Back insertion
 - Front removal
 - Back removal
+- Sorting elements
 - Dynamic resizing
-- Invariant preservation
 
 ## Testing
 
