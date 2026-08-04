@@ -306,8 +306,25 @@ TYPED_TEST(MyDequeTest, IndexOutOfBounds) {
     EXPECT_THROW(q[1000], std::out_of_range);
 }
 
-
 TYPED_TEST(MyDequeTest, IndexJustOutOfBounds) {
     MyDeque<TypeParam> q(this->get_arr_1(), this->get_len_1());
     EXPECT_THROW(q[this->get_len_1()], std::out_of_range);
+}
+
+TYPED_TEST(MyDequeTest, BasicSort) {
+    MyDeque<TypeParam> q(this->get_arr_2(), this->get_len_2());
+    q.sort();
+    EXPECT_EQ(this->get_len_2(), q.length());
+    for (size_t i = 1; i < q.length(); i++)
+        EXPECT_LE(q[i - 1], q[i]); 
+}
+
+TYPED_TEST(MyDequeTest, SortHeadNotNull) {
+    MyDeque<TypeParam> q(this->get_arr_2(), this->get_len_2());
+    for (size_t i = 0; i < this->get_len_1(); i++)
+        q.push_front(this->get_arr_1()[i]);
+    q.sort();
+    EXPECT_EQ(this->get_len_2() + this->get_len_1(), q.length());
+    for (size_t i = 1; i < q.length(); i++)
+        EXPECT_LE(q[i - 1], q[i]); 
 }
