@@ -104,12 +104,15 @@ TYPED_TEST(MyDequeTest, CopyConstructorHeadNotNull) {
 }
 
 TYPED_TEST(MyDequeTest, CopyConstructorIndependent) {
-    MyDeque<TypeParam> q1(this->get_arr_1(), this->get_len_1());
+    size_t len = this->get_len_1();
+    TypeParam* array = this->get_arr_1();
+    MyDeque<TypeParam> q1(array, len);
     MyDeque<TypeParam> q2(q1);
     EXPECT_EQ(q1.length(), q2.length());
     q1.pop_back();
     EXPECT_NE(q1.length(), q2.length());
-    EXPECT_EQ(this->get_arr_1()[2], q2[2]);
+    for (size_t i = 0; i < q2.length(); i++)
+        EXPECT_EQ(array[i], q2[i]);
 }
 
 TYPED_TEST(MyDequeTest, BasicPushBack) {
@@ -272,13 +275,16 @@ TYPED_TEST(MyDequeTest, AssignmentHeadNotNull) {
 }
 
 TYPED_TEST(MyDequeTest, AssignmentIndependent) {
-    MyDeque<TypeParam> q1(this->get_arr_1(), this->get_len_1());
+    size_t len = this->get_len_1();
+    TypeParam* array = this->get_arr_1();
+    MyDeque<TypeParam> q1(array, len);
     MyDeque<TypeParam> q2;
     q2 = q1;
     EXPECT_EQ(q1.length(), q2.length());
     q1.pop_back();
     EXPECT_NE(q1.length(), q2.length());
-    EXPECT_EQ(this->get_arr_1()[2], q2[2]);
+    for (size_t i = 0; i < q2.length(); i++)
+        EXPECT_EQ(array[i], q2[i]);
 }
 
 TYPED_TEST(MyDequeTest, SelfAssignment) {
